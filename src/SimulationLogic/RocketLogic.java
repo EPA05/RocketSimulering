@@ -1,9 +1,10 @@
 package SimulationLogic;
 
-import processing.core.*;
 import java.lang.Math;
+import processing.core.*;
 
 public class RocketLogic {
+
   PApplet p;
   double β;
   double v;
@@ -17,7 +18,7 @@ public class RocketLogic {
   double t;
   double g;
   double m;
-  double h;
+  private double h;
   double dm;
   double time;
 
@@ -57,5 +58,17 @@ public class RocketLogic {
     p.text("Time: " + time, 10, 30);
     p.text("Height: " + h, 10, 60);
     p.text("Velocity: " + v, 10, 90);
+  }
+
+  public double getH() {
+    return h;
+  }
+
+  public double getV() {
+    return v;
+  }
+
+  public double getT() {
+    return time; 
   }
 }
