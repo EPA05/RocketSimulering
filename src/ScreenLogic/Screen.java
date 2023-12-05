@@ -2,9 +2,12 @@ package ScreenLogic;
 
 public class Screen {
 
-  Screen() {}
+  public Screen() {
+  }
 
-  void update() {}
+  void update() {
+  }
 
-  void show() {}
+  public void show() {
+  }
 }

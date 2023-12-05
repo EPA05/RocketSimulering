@@ -1,5 +1,6 @@
 package ScreenLogic;
 
+import ScreenLogic.Screens.StartScreen;
 import processing.core.*;
 
 public class ScreenManager {
@@ -18,7 +19,7 @@ public class ScreenManager {
     currentScreen.show();
   }
 
-  void changeScreen(Screen screen) {
+  public void changeScreen(Screen screen) {
     currentScreen = screen;
   }
 }

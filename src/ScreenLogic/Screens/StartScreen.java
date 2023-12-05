@@ -1,5 +1,8 @@
-package ScreenLogic;
+package ScreenLogic.Screens;
 
+import ScreenLogic.Rocket;
+import ScreenLogic.Screen;
+import ScreenLogic.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PConstants;
 

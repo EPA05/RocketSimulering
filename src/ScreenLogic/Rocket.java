@@ -11,7 +11,7 @@ public class Rocket extends Screen {
   double h, t, v;
   Background bg;
 
-  Rocket(PApplet p) {
+  public Rocket(PApplet p) {
     this.p = p;
     photo = this.p.loadImage("Rocket.png");
     lm = new LogicManager(this.p);
@@ -25,9 +25,22 @@ public class Rocket extends Screen {
     lm.logic();
   }
 
-  void show() {
+  public void show() {
     bg.showBackground(h);
     p.image(photo, p.width / 2 - 37, 300);
+
+    switch ((int) (Math.random() * 3)) {
+      case 0:
+        photo = p.loadImage("Raket1.png");
+        break;
+      case 1:
+        photo = p.loadImage("Raket2.png");
+        break;
+      case 2:
+        photo = p.loadImage("Raket3.png");
+        break;
+    }
+
     p.fill(0);
     p.textSize(20);
     p.rect(6, 10, 10 + p.textWidth("Velocity: " + (int) v + " m/s"), 90);
