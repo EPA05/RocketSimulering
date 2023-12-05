@@ -10,24 +10,28 @@ public class Rocket extends Screen {
   LogicManager lm;
   double h, t, v;
   Background bg;
+  int x;
+  int y;
 
   public Rocket(PApplet p) {
     this.p = p;
     photo = this.p.loadImage("Rocket.png");
     lm = new LogicManager(this.p);
     bg = new Background(this.p);
+    y = 300;
   }
 
   void update() {
     h = lm.getRocketLogic().getH();
     t = lm.getRocketLogic().getT();
     v = lm.getRocketLogic().getV();
+    x = lm.getRocketMovement().getX();
     lm.logic();
   }
 
   public void show() {
     bg.showBackground(h);
-    p.image(photo, p.width / 2 - 37, 300);
+    p.image(photo, x, y);
 
     switch ((int) (Math.random() * 3)) {
       case 0:
