@@ -1,23 +1,24 @@
 package ScreenLogic;
 
-import SimulationLogic.LogicManager;
 import processing.core.*;
 
 public class ScreenManager {
+
   PApplet p;
-  Rocket rocket;
-  LogicManager lm;
+  Screen currentScreen;
 
   public ScreenManager(PApplet p) {
     this.p = p;
-    rocket = new Rocket(p);
-    lm = new LogicManager(p);
+    currentScreen = new StartScreen(this.p, this);
   }
 
   public void show() {
     p.background(0);
-    rocket.show();
-    lm.logic();
+    currentScreen.update();
+    currentScreen.show();
+  }
 
+  void changeScreen(Screen screen) {
+    currentScreen = screen;
   }
 }

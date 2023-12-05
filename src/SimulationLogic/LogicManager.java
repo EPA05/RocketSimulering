@@ -3,6 +3,7 @@ package SimulationLogic;
 import processing.core.PApplet;
 
 public class LogicManager {
+
   PApplet p;
   RocketLogic rl;
 
@@ -13,7 +14,13 @@ public class LogicManager {
 
   public void logic() {
     rl.logic();
+  }
+
+  public void show() {
     rl.textDisplay();
   }
 
+  public RocketLogic getRocketLogic() {
+    return rl;
+  }
 }
