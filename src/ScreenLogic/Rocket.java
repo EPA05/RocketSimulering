@@ -11,7 +11,8 @@ public class Rocket {
     photo = p.loadImage("Rocket.png");
   }
 
-  void show() {
-    p.image(photo, p.width / 2 - 37, 300);
+  public void show() {
+    p.image(photo, 0, 0);
   }
+
 }
