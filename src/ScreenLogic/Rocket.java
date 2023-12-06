@@ -27,6 +27,9 @@ public class Rocket extends Screen {
 
   void show() {
     bg.showBackground(h);
+    bg.cloudLogic();
+    bg.displayCloud();
+
     p.image(photo, p.width / 2 - 37, 300);
     p.fill(0);
     p.textSize(20);
