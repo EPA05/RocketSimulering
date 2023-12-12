@@ -31,6 +31,9 @@ public class Rocket extends Screen {
 
   public void show() {
     bg.showBackground(h);
+    bg.cloudLogic();
+    bg.displayCloud();
+
     p.image(photo, x, y);
 
     switch ((int) (Math.random() * 3)) {
