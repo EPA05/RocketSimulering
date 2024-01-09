@@ -7,6 +7,7 @@ public class Bomb {
   PImage photo;
   int x;
   int y;
+  Rocket r;
 
   public Bomb(PApplet p) {
     this.p = p;
@@ -22,6 +23,15 @@ public class Bomb {
     }
     y = y + 3;
     p.image(photo, x, y);
+  }
+
+  public boolean hitRocket(Rocket r) {
+    if (x + photo.width / 2 > r.x && x + photo.width / 2 < r.x + r.photo.width && y + photo.height > r.y
+        && y + photo.height < r.y + r.photo.height) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public int getX() {

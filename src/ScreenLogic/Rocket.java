@@ -2,6 +2,7 @@ package ScreenLogic;
 
 import java.util.ArrayList;
 
+import ScreenLogic.Screens.GameOverScreen;
 import SimulationLogic.LogicManager;
 import processing.core.*;
 
@@ -15,13 +16,16 @@ public class Rocket extends Screen {
   int x;
   int y;
   ArrayList<Bomb> bombs;
+  ScreenManager sm;
 
-  public Rocket(PApplet p) {
+  public Rocket(PApplet p, ScreenManager sm) {
     this.p = p;
     photo = this.p.loadImage("Rocket.png");
     lm = new LogicManager(this.p);
     bg = new Background(this.p);
     bombs = new ArrayList<Bomb>();
+    this.sm = sm;
+    x = 300;
     y = 300;
 
   }
@@ -74,6 +78,12 @@ public class Rocket extends Screen {
     for (int i = 0; i < bombs.size(); i++) {
       if (bombs.get(i).getY() > (p.height)) {
         bombs.remove(i);
+      }
+    }
+
+    for (int i = 0; i < bombs.size(); i++) {
+      if (bombs.get(i).hitRocket(this)) {
+        sm.changeScreen(new GameOverScreen(this.p, sm));
       }
     }
   }

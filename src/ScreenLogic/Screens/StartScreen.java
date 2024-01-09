@@ -22,7 +22,7 @@ public class StartScreen extends Screen {
     p.fill(255);
     p.text("Press Enter to start", 100, 100);
     if (p.keyCode == PConstants.ENTER) {
-      sm.changeScreen(new Rocket(this.p));
+      sm.changeScreen(new Rocket(this.p, sm));
     }
   }
 }
