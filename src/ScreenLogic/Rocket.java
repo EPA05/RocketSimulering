@@ -1,5 +1,7 @@
 package ScreenLogic;
 
+import java.util.ArrayList;
+
 import SimulationLogic.LogicManager;
 import processing.core.*;
 
@@ -12,13 +14,16 @@ public class Rocket extends Screen {
   Background bg;
   int x;
   int y;
+  ArrayList<Bomb> bombs;
 
   public Rocket(PApplet p) {
     this.p = p;
     photo = this.p.loadImage("Rocket.png");
     lm = new LogicManager(this.p);
     bg = new Background(this.p);
+    bombs = new ArrayList<Bomb>();
     y = 300;
+
   }
 
   void update() {
@@ -33,6 +38,7 @@ public class Rocket extends Screen {
     bg.showBackground(h);
     bg.cloudLogic();
     bg.displayCloud();
+    bomb();
 
     p.image(photo, x, y);
 
@@ -57,4 +63,18 @@ public class Rocket extends Screen {
     p.text("Velocity: " + (int) v + " m/s", 10, 90);
   }
 
+  public void bomb() {
+    if (bombs.size() < 7 && p.frameCount % 50 == 0) {
+      bombs.add(new Bomb(p));
+    }
+    for (int i = 0; i < bombs.size(); i++) {
+      bombs.get(i).show();
+    }
+
+    for (int i = 0; i < bombs.size(); i++) {
+      if (bombs.get(i).getY() > (p.height)) {
+        bombs.remove(i);
+      }
+    }
+  }
 }
