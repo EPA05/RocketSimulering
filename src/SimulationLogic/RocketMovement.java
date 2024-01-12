@@ -13,9 +13,9 @@ public class RocketMovement {
 
   public void movement() {
     if (p.keyPressed) {
-      if (p.key == 'a' || p.key == 'A') {
+      if (p.key == 'a' || p.key == 'A' || p.keyCode == PConstants.LEFT) {
         x -= 5;
-      } else if (p.key == 'd' || p.key == 'D') {
+      } else if (p.key == 'd' || p.key == 'D' || p.keyCode == PConstants.RIGHT) {
         x += 5;
       }
     }

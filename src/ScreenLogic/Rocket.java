@@ -17,7 +17,9 @@ public class Rocket extends Screen {
   int x;
   int y;
   ArrayList<Bomb> bombs;
+  ArrayList<Coin> coins;
   ScreenManager sm;
+  int coinCounter;
 
   public Rocket(PApplet p, ScreenManager sm) {
     this.p = p;
@@ -25,9 +27,11 @@ public class Rocket extends Screen {
     lm = new LogicManager(this.p);
     bg = new Background(this.p);
     bombs = new ArrayList<Bomb>();
+    coins = new ArrayList<Coin>();
     this.sm = sm;
     x = 300;
     y = 300;
+    coinCounter = 0;
 
   }
 
@@ -45,6 +49,9 @@ public class Rocket extends Screen {
     bg.cloudLogic();
     bg.displayCloud();
     bomb();
+    gameOver();
+    coin();
+    coinCounter();
 
     p.image(photo, x, y);
 
@@ -90,4 +97,32 @@ public class Rocket extends Screen {
     }
   }
 
+  void gameOver() {
+    if (v < 0) {
+      sm.changeScreen(new GameOverScreen(p, sm, maxHeight));
+    }
+  }
+
+  public void coin() {
+    if (coins.size() < 7 && p.frameCount % 30 == 0) {
+      coins.add(new Coin(p));
+    }
+
+    for (Coin coin : coins) {
+      coin.show(); // Fix: Call the show() method on each individual Coin object
+      if (coin.getY() > (p.height)) {
+        coins.remove(coin);
+      }
+      if (coin.hitRocket(this)) {
+        coinCounter++;
+      }
+    }
+  }
+
+  void coinCounter() {
+    p.textSize(32);
+    p.fill(255);
+    p.text("Coins: " + coinCounter, p.width - 150, 30);
+
+  }
 }
