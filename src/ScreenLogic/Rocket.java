@@ -12,6 +12,7 @@ public class Rocket extends Screen {
   PImage photo;
   LogicManager lm;
   double h, t, v;
+  int maxHeight;
   Background bg;
   int x;
   int y;
@@ -35,6 +36,7 @@ public class Rocket extends Screen {
     t = lm.getRocketLogic().getT();
     v = lm.getRocketLogic().getV();
     x = lm.getRocketMovement().getX();
+    maxHeight = lm.getRocketLogic().getMaxHeight();
     lm.logic();
   }
 
@@ -83,8 +85,9 @@ public class Rocket extends Screen {
 
     for (int i = 0; i < bombs.size(); i++) {
       if (bombs.get(i).hitRocket(this)) {
-        sm.changeScreen(new GameOverScreen(this.p, sm));
+        sm.changeScreen(new GameOverScreen(p, sm, maxHeight));
       }
     }
   }
+
 }

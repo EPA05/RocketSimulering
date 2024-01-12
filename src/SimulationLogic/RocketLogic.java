@@ -23,6 +23,8 @@ public class RocketLogic {
   double time;
   double T;
   double pressure;
+  double h1;
+  int maxHeight;
 
   RocketLogic(PApplet p) {
     this.p = p;
@@ -45,14 +47,18 @@ public class RocketLogic {
     β = 1 / 2 * ρ * A * c_w;
     m = m - (dm) * t;
 
-    if (m < 0.215) {
-      m = 0.215;
+    if (m < m_2) {
+      m = m_2;
       dm = 0;
       u = 0;
     }
     v = v + (((-u * dm) - (m * g) - (β * v * Math.abs(v))) / (m)) * t;
+    h1 = h;
     h = h + v * t;
     time = time + t;
+    if (h > maxHeight) {
+      maxHeight = (int) h;
+    }
   }
 
   void airDensity() {
@@ -96,4 +102,7 @@ public class RocketLogic {
     return time;
   }
 
+  public int getMaxHeight() {
+    return maxHeight;
+  }
 }
