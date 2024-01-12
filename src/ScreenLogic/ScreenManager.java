@@ -15,8 +15,8 @@ public class ScreenManager {
 
   public void show() {
     p.background(0);
-    currentScreen.update();
     currentScreen.show();
+    currentScreen.update();
   }
 
   public void changeScreen(Screen screen) {

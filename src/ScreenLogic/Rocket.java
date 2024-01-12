@@ -1,5 +1,8 @@
 package ScreenLogic;
 
+import java.util.ArrayList;
+
+import ScreenLogic.Screens.GameOverScreen;
 import SimulationLogic.LogicManager;
 import processing.core.*;
 
@@ -9,16 +12,23 @@ public class Rocket extends Screen {
   PImage photo;
   LogicManager lm;
   double h, t, v;
+  int maxHeight;
   Background bg;
   int x;
   int y;
+  ArrayList<Bomb> bombs;
+  ScreenManager sm;
 
-  public Rocket(PApplet p) {
+  public Rocket(PApplet p, ScreenManager sm) {
     this.p = p;
     photo = this.p.loadImage("Rocket.png");
     lm = new LogicManager(this.p);
     bg = new Background(this.p);
+    bombs = new ArrayList<Bomb>();
+    this.sm = sm;
+    x = 300;
     y = 300;
+
   }
 
   void update() {
@@ -26,6 +36,7 @@ public class Rocket extends Screen {
     t = lm.getRocketLogic().getT();
     v = lm.getRocketLogic().getV();
     x = lm.getRocketMovement().getX();
+    maxHeight = lm.getRocketLogic().getMaxHeight();
     lm.logic();
   }
 
@@ -33,6 +44,7 @@ public class Rocket extends Screen {
     bg.showBackground(h);
     bg.cloudLogic();
     bg.displayCloud();
+    bomb();
 
     p.image(photo, x, y);
 
@@ -55,6 +67,27 @@ public class Rocket extends Screen {
     p.text("Height: " + (int) h + " m", 10, 30);
     p.text("Time: " + (int) t + " s", 10, 60);
     p.text("Velocity: " + (int) v + " m/s", 10, 90);
+  }
+
+  public void bomb() {
+    if (bombs.size() < 7 && p.frameCount % 50 == 0) {
+      bombs.add(new Bomb(p));
+    }
+    for (int i = 0; i < bombs.size(); i++) {
+      bombs.get(i).show();
+    }
+
+    for (int i = 0; i < bombs.size(); i++) {
+      if (bombs.get(i).getY() > (p.height)) {
+        bombs.remove(i);
+      }
+    }
+
+    for (int i = 0; i < bombs.size(); i++) {
+      if (bombs.get(i).hitRocket(this)) {
+        sm.changeScreen(new GameOverScreen(p, sm, maxHeight));
+      }
+    }
   }
 
 }
