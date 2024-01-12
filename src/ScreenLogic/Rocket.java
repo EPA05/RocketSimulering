@@ -109,8 +109,8 @@ public class Rocket extends Screen {
     }
 
     for (Coin coin : coins) {
-      coin.show(); // Fix: Call the show() method on each individual Coin object
-      if (coin.getY() > (p.height)) {
+      coin.show();
+      if (coin.getY() > (p.height) || coin.hitRocket(this)) {
         coins.remove(coin);
       }
       if (coin.hitRocket(this)) {
