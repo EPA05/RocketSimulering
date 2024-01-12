@@ -59,6 +59,7 @@ public class RocketLogic {
     if (h > maxHeight) {
       maxHeight = (int) h;
     }
+
   }
 
   void airDensity() {
