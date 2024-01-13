@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import ScreenLogic.Screens.GameOverScreen;
 import SimulationLogic.LogicManager;
 import processing.core.*;
+import ScreenLogic.Screens.StartScreen;
 
 public class Rocket extends Screen {
 
   PApplet p;
   PImage photo;
   LogicManager lm;
+  StartScreen ss;
   double h, t, v;
   int maxHeight;
   Background bg;
@@ -21,18 +23,17 @@ public class Rocket extends Screen {
   ScreenManager sm;
   int coinCounter;
 
-  public Rocket(PApplet p, ScreenManager sm) {
+  public Rocket(PApplet p, ScreenManager sm, StartScreen ss) {
     this.p = p;
+    this.ss = ss;
     photo = this.p.loadImage("Rocket.png");
-    lm = new LogicManager(this.p);
+    lm = new LogicManager(this.p, sm);
     bg = new Background(this.p);
     bombs = new ArrayList<Bomb>();
     coins = new ArrayList<Coin>();
     this.sm = sm;
     x = 300;
     y = 300;
-    coinCounter = 0;
-
   }
 
   void update() {
@@ -114,7 +115,10 @@ public class Rocket extends Screen {
         coins.remove(coin);
       }
       if (coin.hitRocket(this)) {
-        coinCounter++;
+        if (h < 1000)
+          sm.addCoin(1);
+      } else if (h > 1000) {
+        sm.addCoin(2);
       }
     }
   }
@@ -122,7 +126,8 @@ public class Rocket extends Screen {
   void coinCounter() {
     p.textSize(32);
     p.fill(255);
-    p.text("Coins: " + coinCounter, p.width - 150, 30);
+    p.text("Coins: " + sm.getCoinCount(), p.width - 150, 30);
 
   }
+
 }

@@ -1,16 +1,19 @@
 package SimulationLogic;
 
 import processing.core.PApplet;
+import ScreenLogic.ScreenManager;
 
 public class LogicManager {
 
   PApplet p;
   RocketLogic rl;
   RocketMovement rm;
+  ScreenManager sm;
 
-  public LogicManager(PApplet p) {
+  public LogicManager(PApplet p, ScreenManager sm) {
     this.p = p;
-    rl = new RocketLogic(p);
+    this.sm = sm;
+    rl = new RocketLogic(p, sm);
     rm = new RocketMovement(p);
   }
 
