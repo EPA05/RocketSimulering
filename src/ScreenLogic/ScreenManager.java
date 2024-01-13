@@ -42,11 +42,11 @@ public class ScreenManager {
   }
 
   public int fuelUpgradeCount() {
-    return massUpgradeCount;
+    return fuelUpgradeCount;
   }
 
   public void addFuelUpgradeCount() {
-    massUpgradeCount++;
+    fuelUpgradeCount++;
   }
 
   public int massUpgradeCount() {
