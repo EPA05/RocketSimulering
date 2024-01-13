@@ -32,13 +32,13 @@ public class RocketLogic {
     this.p = p;
     this.sm = sm;
     v = 0;
-    A = 0.007088218 * (1 - sm.dragUpgradeCount() * 0.1);
+    A = 0.007088218;
     c_w = 0.04;
-    m_1 = 0.885 * (1 + sm.fuelUpgradeCount() * 0.1);
-    m_2 = 0.215 * (1 - sm.massUpgradeCount() * 0.1);
+    m_1 = 0.885;
+    m_2 = 0.215;
     m = m_1;
     a = 0;
-    u = -34 * (1 + sm.thrustUpgradeCount() * 0.1);
+    u = -34;
     t = 1 / 24.0;
     g = 9.82;
     h = 0;
@@ -47,6 +47,7 @@ public class RocketLogic {
 
   public void logic() {
     airDensity();
+    updateUpgrades();
     β = 1 / 2 * ρ * A * c_w;
     m = m - (dm) * t;
 
@@ -85,6 +86,13 @@ public class RocketLogic {
       ρ = pressure / (0.2869 * (T + 273.1));
 
     }
+  }
+
+  void updateUpgrades() {
+    A = 0.007088218 * (1 - sm.dragUpgradeCount() * 0.1);
+    m_1 = 0.885 * (1 + sm.fuelUpgradeCount() * 0.1);
+    m_2 = 0.215 * (1 - sm.massUpgradeCount() * 0.1);
+    u = -34 * (1 + sm.thrustUpgradeCount() * 0.1);
   }
 
   void textDisplay() {
