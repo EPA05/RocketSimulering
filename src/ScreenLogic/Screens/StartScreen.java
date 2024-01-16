@@ -5,6 +5,12 @@ import ScreenLogic.Screen;
 import ScreenLogic.ScreenManager;
 import processing.core.*;
 
+/**
+ * The StartScreen class represents the screen where the game starts and players
+ * can buy upgrades.
+ * It extends the Screen class and contains methods for displaying the screen
+ * and handling user interactions.
+ */
 public class StartScreen extends Screen {
 
   PApplet p;
@@ -27,6 +33,10 @@ public class StartScreen extends Screen {
     dragCost = sm.dragUpgradeCount() + 1;
   }
 
+  /**
+   * Displays the StartScreen.
+   * This method is called by the ScreenManager to show the screen.
+   */
   public void show() {
     p.background(0);
     p.textSize(32);
@@ -41,7 +51,14 @@ public class StartScreen extends Screen {
     shop();
   }
 
+  /**
+   * Displays the shop section of the StartScreen.
+   * This method is responsible for rendering the shop interface and handling user
+   * interactions.
+   */
   void shop() {
+
+    // Fuel shop
     p.fill(0);
     p.stroke(255);
     p.rect(430, 70, 150, 80);
@@ -64,8 +81,7 @@ public class StartScreen extends Screen {
         }
       }
     }
-
-    // Buy more mass
+    // Mass shop
     p.fill(0);
     p.stroke(255);
     p.rect(430, 170, 150, 80);
@@ -75,6 +91,8 @@ public class StartScreen extends Screen {
     p.text("Buy less mass", 440, 200);
     p.text("Costs: " + massCost + " coins", 440, 225);
     p.noFill();
+
+    // Buy more mass
     if (p.frameCount % 3 == 0) {
       if (p.mousePressed && p.mouseX > 430 && p.mouseX < 580 && p.mouseY > 170 && p.mouseY < 250) {
         if (sm.getCoinCount() >= massCost) {
@@ -85,7 +103,7 @@ public class StartScreen extends Screen {
       }
     }
 
-    // Buy more thrust
+    // Thrust shop
     p.fill(0);
     p.stroke(255);
     p.rect(430, 270, 150, 80);
@@ -96,6 +114,7 @@ public class StartScreen extends Screen {
     p.text("Costs: " + thrustCost + " coins", 440, 325);
     p.noFill();
 
+    // Buy more thrust
     if (p.frameCount % 3 == 0) {
       if (p.mousePressed && p.mouseX > 430 && p.mouseX < 580 && p.mouseY > 270 && p.mouseY < 350) {
         if (sm.getCoinCount() >= thrustCost) {
@@ -106,7 +125,7 @@ public class StartScreen extends Screen {
       }
     }
 
-    // Buy more drag
+    // Drag shop
     p.fill(0);
     p.stroke(255);
     p.rect(430, 370, 150, 80);
@@ -117,6 +136,7 @@ public class StartScreen extends Screen {
     p.text("Costs: " + dragCost + " coins", 440, 425);
     p.noFill();
 
+    // Buy more drag
     if (p.frameCount % 3 == 0) {
       if (p.mousePressed && p.mouseX > 430 && p.mouseX < 580 && p.mouseY > 370 && p.mouseY < 450) {
         if (sm.getCoinCount() >= dragCost) {

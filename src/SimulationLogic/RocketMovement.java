@@ -2,15 +2,21 @@ package SimulationLogic;
 
 import processing.core.*;
 
+/**
+ * The RocketMovement class handles the movement of a rocket in a simulation.
+ */
 public class RocketMovement {
   PApplet p;
-  int x;
+  int x; // The x-coordinate of the rocket
 
   RocketMovement(PApplet p) {
     this.p = p;
     x = (p.width / 2) - 37;
   }
 
+  /**
+   * Handles the movement of the rocket based on user input.
+   */
   public void movement() {
     if (p.keyPressed) {
       if (p.key == 'a' || p.key == 'A' || p.keyCode == PConstants.LEFT) {
@@ -28,6 +34,9 @@ public class RocketMovement {
     }
   }
 
+  /**
+   * Gets the x-coordinate of the rocket.
+   */
   public int getX() {
     return x;
   }

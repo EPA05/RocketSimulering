@@ -7,21 +7,26 @@ import SimulationLogic.LogicManager;
 import processing.core.*;
 import ScreenLogic.Screens.StartScreen;
 
+/**
+ * The Rocket class represents a rocket in the simulation.
+ * It extends the Screen class and contains methods for updating and displaying
+ * the rocket.
+ */
 public class Rocket extends Screen {
 
-  PApplet p;
-  PImage photo;
-  LogicManager lm;
-  StartScreen ss;
-  double h, t, v;
-  int maxHeight;
-  Background bg;
-  int x;
-  int y;
-  ArrayList<Bomb> bombs;
-  ArrayList<Coin> coins;
-  ScreenManager sm;
-  int coinCounter;
+  PApplet p; // The PApplet object for rendering.
+  PImage photo; // The image of the rocket
+  LogicManager lm; // The LogicManager object for performing logic calculations.
+  StartScreen ss; // The StartScreen object for starting the game.
+  double h, t, v; // The height, time, and velocity of the rocket.
+  int maxHeight; // The max height the rocket reached before dying.
+  Background bg; // The Background object for displaying the background.
+  int x; // The x-coordinate of the rocket.
+  int y; // The y-coordinate of the rocket.
+  ArrayList<Bomb> bombs; // The ArrayList of bombs.
+  ArrayList<Coin> coins; // The ArrayList of coins.
+  ScreenManager sm; // The ScreenManager object for managing screens.
+  int coinCounter; // The number of collected coins.
 
   public Rocket(PApplet p, ScreenManager sm, StartScreen ss) {
     this.p = p;
@@ -36,6 +41,9 @@ public class Rocket extends Screen {
     y = 300;
   }
 
+  /**
+   * Updates the rocket's properties and performs logic calculations.
+   */
   void update() {
     h = lm.getRocketLogic().getH();
     t = lm.getRocketLogic().getT();
@@ -45,6 +53,9 @@ public class Rocket extends Screen {
     lm.logic();
   }
 
+  /**
+   * Displays the rocket and other game elements on the screen.
+   */
   public void show() {
     bg.showBackground(h);
     bg.cloudLogic();
@@ -56,6 +67,7 @@ public class Rocket extends Screen {
 
     p.image(photo, x, y);
 
+    // Randomizes the rocket image to create a little animation.
     switch ((int) (Math.random() * 3)) {
       case 0:
         photo = p.loadImage("Raket1.png");
@@ -77,6 +89,11 @@ public class Rocket extends Screen {
     p.text("Velocity: " + (int) v + " m/s", 10, 90);
   }
 
+  /**
+   * Creates and displays bombs on the screen.
+   * Removes bombs that have fallen off the screen.
+   * Ends the game if a bomb hits the rocket.
+   */
   public void bomb() {
     if (bombs.size() < 7 && p.frameCount % 50 == 0) {
       bombs.add(new Bomb(p));
@@ -98,12 +115,20 @@ public class Rocket extends Screen {
     }
   }
 
+  /**
+   * Ends the game if the rocket's velocity becomes negative.
+   */
   void gameOver() {
     if (v < 0) {
       sm.changeScreen(new GameOverScreen(p, sm, maxHeight));
     }
   }
 
+  /**
+   * Creates and displays coins on the screen.
+   * Removes coins that have fallen off the screen or hit the rocket.
+   * Increases the coin count if a coin is collected.
+   */
   public void coin() {
     if (coins.size() < 7 && p.frameCount % 30 == 0) {
       coins.add(new Coin(p));
@@ -123,11 +148,12 @@ public class Rocket extends Screen {
     }
   }
 
+  /**
+   * Displays the current coin count on the screen.
+   */
   void coinCounter() {
     p.textSize(32);
     p.fill(255);
     p.text("Coins: " + sm.getCoinCount(), p.width - 150, 30);
-
   }
-
 }

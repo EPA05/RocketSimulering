@@ -3,6 +3,10 @@ package ScreenLogic;
 import java.util.ArrayList;
 import processing.core.*;
 
+/**
+ * The Background class represents the background of the simulation.
+ * It handles the display of the background color and the clouds.
+ */
 public class Background {
 
   PApplet p;
@@ -13,6 +17,9 @@ public class Background {
     clouds = new ArrayList<Cloud>();
   }
 
+  /**
+   * Displays the background color based on the given height value.
+   */
   void showBackground(double hIn) {
     int tempH = (int) hIn;
 
@@ -26,18 +33,23 @@ public class Background {
     p.background(R, G, B);
   }
 
+  /**
+   * Handles the logic for creating and removing clouds.
+   */
   void cloudLogic() {
     if (clouds.size() < 10 && p.frameCount % 10 == 0) {
       clouds.add(new Cloud(p));
     }
-
     for (int i = 0; i < clouds.size(); i++) {
       if (clouds.get(i).getY() > (p.height + clouds.get(i).getCloudHeight())) {
-        clouds.remove(i);
+        clouds.remove(i); // Remove the cloud if it is off the screen
       }
     }
   }
 
+  /**
+   * Displays the clouds on the screen.
+   */
   void displayCloud() {
     for (int i = 0; i < clouds.size(); i++) {
       clouds.get(i).updateY();
